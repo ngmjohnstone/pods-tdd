@@ -1,8 +1,12 @@
 package scala
 
 // Imports
-import elaboration.fibonacci._
+import elaboration.animal
+import elaboration.animal.Animal
 import elaboration.converter._
+import elaboration.fibonacci.generateNthFibonacciNumber
+
+import scala.util.Try
 
 
 /**
@@ -22,10 +26,23 @@ object main extends App {
   /*
   Put anything you want to see in the console here and run main with the green arrow.
    */
-  val converted5 = giveMeTheAnimal(5)
-  println(converted5)
 
-  val convertedTiger = convertAnimalToNumber("Tiger")
-  println(convertedTiger)
+  println(generateNthFibonacciNumber(45))
+
+
+//  val unicorn = convertAnimalToInteger(_)
+//  println(unicorn.message)
+//  val converted3 = convertIntegerToAnimal(3)
+//  println(converted3)
+
+
+//  val testFib = generateNthFibonacciNumber(30)
+//  println(testFib)
+
+//  val converted5 = convertIntegerToAnimal(5)
+//  println(converted5)
+//
+//  val convertedTiger = convertAnimalToInteger("Tiger")
+//  println(convertedTiger)
 
 }
