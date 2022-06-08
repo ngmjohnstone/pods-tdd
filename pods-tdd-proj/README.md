@@ -105,6 +105,8 @@ You want your unit tests to be 'small':
 
 The actual syntax will depend on the library that you're working with, but the principles are always the same.
 
+### A silly example:
+
 Here's the anatomy of the simplest test in this project, called "Give me the same number I put in".
 This test is here: `src/test/scala/MainSpec.scala`
 
@@ -128,3 +130,53 @@ This is obviously a contrived scenario, but the _Given, When, Then_ pattern is w
 - Given: what is the context for our test scenario. Here, the context is that we're passing in 42 as a parameter.
 - When: the method we want to test. Here, the method is `giveMeN`, and we're passing it our input.
 - Then: what we assert will be the case. Here, we assert that `giveMe42 == 42`.
+
+This is a powerful 3 step process that will help you to write unit tests for any piece of code.
+
+### A more elaborate example:
+
+Let's say that you work on a team which sometimes estimates the complexity of a ticket with a numeric score and sometimes an animal.
+Your team all hate arithmetic, but fortunately a developer extracted this process into tested methods a long time ago.
+
+Take a look inside `src/main/scala/elaboration` to see the code.
+
+`animal` is a simple data structure.
+`fibonacci` contains a method for generating terms of the Fibonacci sequence.
+`converter` takes animals and gives integers, and _vice versa_.
+
+Now look in `src/test/scala/elaboration` to see some tests.
+
+`FibonacciSpec` contains some more assertions.
+- These are 'happy paths'. We've asserted based on the default scenario, that is, what happens when everything goes to plan.
+- These paths have no errors or exceptions, and represent the smooth/positive journey.
+- They are well-defined and use known inputs.
+- They are usually few in number, because your method shouldn't take lots of different things and return happy responses.
+
+`ConverterSpec` contains some error interceptions:
+- These are 'unhappy paths'. They work on the principle that something has gone wrong.
+- Here, we're handling errors and exceptions based on bad inputs to the functions.
+  - Scala does some of this for us with the type system, but it can't cover everything.
+  - For example, maybe the way we've chosen to model data in the first place was incorrect.
+- They are more numerous than the happy paths: more things can go wrong than right.
+
+`FibonacciProp` contains some property-based tests:
+- These are useful because you can't possibly write a huge suite of tests that assert for every possible input.
+- Instead, you find a property of your code and test against that.
+- This example has two properties: 
+  - all Fibonacci numbers are positive, and 
+  - all Fibonacci numbers are the sum of the two previous numbers.
+- You might have noticed that `fibonacciDomain` only takes input from `1 to 46`...
+- ... have a play around to see why that might be!
+
+### How do I find properties of my code for testing?
+- This can be quite difficult, but things to look out for are:
+  - invariants: like all Fibonacci numbers being positive, or
+  - identities: like all Fibonacci numbers being the sum of the two previous terms.
+  - More info: https://www.youtube.com/watch?v=Jhzc7fxY5lw 
+
+## Challenge: 
+
+You've moved to a new team who think that the Fibonacci sequence grows too slowly.
+They'd like to keep animals and numbers, but use the factorials instead: https://en.wikipedia.org/wiki/Factorial
+
+Using the TDD approach, make this dream a reality!

@@ -7,7 +7,7 @@ object animal {
    */
   sealed trait Animal
   /*
-  Here are the animals we currently use on PODS:
+  Here are the animals we currently use on PODS (except Wasp):
    */
   object Animal extends Enumeration {
     case object Mouse extends Animal
